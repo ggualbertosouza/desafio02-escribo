@@ -1,6 +1,7 @@
 
 # Desafio 02 Escribo
 
+  Hospedada na AWS, serviço EC2.
 
 ## Documentação da API
 
