@@ -1,71 +1,37 @@
-SIGNIN - login
-SIGNUP - register
 
-Endpoints:
-
-    - SignUp
-        - Request:
-            {
-                "nome": "string",
-                "email": "string",
-                "senha": "string",
-                "telefone": [{"numero": "int", "ddd": "int"}]
-            }
-        - Response:
-            {
-                id: GUID/ID,
-                data_criacao: data,
-                data_atualizacao: data,
-                ultimo_login: data,
-                token: GUID/JWT
-            }
-        - SignUp()
-        - errors :
-            -Email já cadastrado {"mensagem": "E-mail já existente"}
+# Desafio 02 Escribo
 
 
-    - SignIn
-        - Request:
-            {
-                email: string,
-                senha: string
-            }
-        - Response:
-            {
-                id: GUID/ID,
-                data_criacao: data,
-                data_atualizacao: data,
-                ultimo_login: data,
-                token: GUID/JWT
-            }
-        - SignIn()
-        - errors:
-            - E-mail não cadastrado ou senha incorreta: {"mensagem": "Usuário e/ou senha inválidos"}
-            - Senha incorreta: status 401 com: {"mensagem": "Usuário e/ou senha inválidos"}
+## Documentação da API
+
+#### GET USER
+
+```http
+  GET http://3.92.235.110:3000/getuser
+```
+
+| Authorization   | Tipo       | Descrição                           |
+| :---------- | :--------- | :---------------------------------- |
+| `Bearer token` | `token` |  Request.header e pega usuário pelo id do jwt| 
+                                    
+#### SIGNUP
+
+```http
+  POST http://3.92.235.110:3000/signup
+```
+
+| body   | Tipo       | Descrição                                   |
+| :---------- | :--------- | :------------------------------------------ |
+| `raw`      | `json` | nome, email, senha |
+
+#### SIGNIN
+
+```http
+  POST http://3.92.235.110:3000/signin
+```
+
+| body   | Tipo       | Descrição                                   |
+| :---------- | :--------- | :------------------------------------------ |
+| `raw`      | `json` | email, senha |
 
 
-    - Buscar usuário
-        - Request:
-            - Header Authentication com valor "Bearer {token}"
-        - GetUser()
-        - errors:
-            - Token inválido: {"mensagem": "Não autorizado"}
-            - Token expirado - 30 min:  {"mensagem" "Sessão inválida"}
-
-requisitos=
-[x] User json na request e response
-[] Persistência de dados
-[] Sistema de build com gerenciamento de dependências
-[] Task runner para build
-[] Linter jsHint | JsLin
-[x] Express
-
-Desejáveis -
-[] jwt como token
-[] testes unitários
-[] criptografia hash na senha e token
-
-
-HOSPEDAGEM: 
-
-DB - desafio02
