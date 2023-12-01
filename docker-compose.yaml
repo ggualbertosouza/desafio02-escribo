@@ -1,0 +1,35 @@
+version: "3.8"
+
+services:
+  api:
+    container_name: desafioEscribo
+    depends_on:
+      - postgres
+    ports:
+      - "3000:3000"
+    networks:
+      - desafio
+    restart: on-failure
+    volumes:
+      - .:/usr/src/app
+    build:
+      context: .
+
+  postgres:
+    container_name: postgres
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: desafio
+    volumes:
+      - ./data:/data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - desafio
+    restart: on-failure
+
+networks:
+  desafio:
+    driver: bridge
